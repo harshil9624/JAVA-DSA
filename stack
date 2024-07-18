@@ -1,0 +1,84 @@
+
+import java.util.Scanner;
+
+public class Stack {
+
+    static int top = -1;
+    static int[] a;
+    static Scanner sc;
+
+    public static void main(String[] args) {
+
+        while (true) {
+
+            System.out.println("1.insert");
+            System.out.println("2.delete");
+            System.out.println("3.display");
+            System.out.println("0 Press for exit");
+            sc = new Scanner(System.in);
+            System.out.print("Enter choise :");
+            int ans = sc.nextInt();
+            System.out.println("you select : " + ans);
+            switch (ans) {
+                case 1:
+
+                    add();
+                    break;
+
+                case 2:
+                    remove();
+                    break;
+
+                case 3:
+                    display();
+                    break;
+                case 0:
+                    System.out.println("Exiting...");
+                    return;
+
+            }
+
+        }
+
+    }
+
+    static void add() {
+        sc = new Scanner(System.in);
+        System.out.println("How many element do you want to insert");
+        int num = sc.nextInt();
+        a = new int[num];
+        if (top == a.length - 1) {
+            System.out.println("Stack is full");
+
+        } else {
+
+            for (int i = 0; i < a.length; i++) {
+                top++;
+                a[i] = sc.nextInt();
+
+            }
+            System.out.println("Data inserted");
+        }
+    }
+
+    static void remove() {
+
+        if (top == -1) {
+            System.out.println("Stack is empty");
+
+        } else {
+            top = top - 1;
+            System.out.println("item deleted");
+
+        }
+    }
+
+    static void display() {
+        System.out.println("Your element");
+        for (int i = top; i >= 0; i--) {
+            System.out.print(a[i] + " ");
+        }
+
+    }
+
+}
