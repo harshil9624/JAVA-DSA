@@ -1,0 +1,166 @@
+
+import java.util.Scanner;
+
+public class Doublylinklist {
+
+    static class Node {
+        Node prev;
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.prev = null;
+            this.data = data;
+            this.next = null;
+        }
+
+    }
+
+    static Node head = null;
+    static Node tail = null;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Doublylinklist db = new Doublylinklist();
+
+        while (true) {
+            System.out.println(" ");
+            System.out.println("1. Create Node\n2. Display\n3.Delete\n0. Exit");
+            System.out.print("Enter Input: ");
+            int data = sc.nextInt();
+            switch (data) {
+                case 1:
+                    db.create();
+                    break;
+                case 2:
+                    db.Display();
+                    break;
+                case 3:
+                    db.Remove();
+                case 0:
+                    break;
+                default:
+                    System.out.println("Invalid input, please try again.");
+            }
+        }
+    }
+
+    static void create() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter data");
+        int value = sc.nextInt();
+        Node new_node = new Node(value);
+
+        if (head == null) {
+
+            head = new_node;
+            tail = new_node;
+
+        }
+
+        else {
+
+            while (true) {
+                System.out.println("Doubly linklist");
+                System.out.println("1. Begin Node\n2. End Node\n3. Specific Position\n0. Exit");
+                System.out.print("Enter where you want to insert: ");
+                int data = sc.nextInt();
+
+                switch (data) {
+
+                    case 1:
+                        new_node.next = head;
+                        head.prev = new_node;
+
+                        head = new_node;
+
+                        System.out.println("Node ineart at begin");
+                        return;
+
+                    case 2:
+                        tail.next = new_node;
+                        new_node.prev = tail;
+                        tail = new_node;
+                        System.out.println(tail.data);
+                        System.out.println("Node ineart at end");
+                        return;
+
+                    case 3:
+                        Node temp = head;
+                        Node ptr = temp.next;
+                        int i = sc.nextInt();
+                        for (int j = 0; j < i - 2; j++) {
+
+                            temp = ptr;
+                            ptr = ptr.next;
+
+                        }
+                        new_node.prev = temp;
+                        new_node.next = ptr;
+                        temp.next = new_node;
+                        ptr.prev = new_node;
+                        System.out.println("node inserted");
+                        // 100 200 300 400
+                        return;
+                }
+            }
+        }
+
+    }
+
+    static void Remove() {
+
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Doubly linklist  Deletion");
+            System.out.println("1. Begin Node\n2. End Node\n3. Specific Position\n0. Exit");
+            System.out.print("Enter where you want to Delete: ");
+            int data = sc.nextInt();
+
+            switch (data) {
+                case 1:
+                    Node temp = head;
+                    temp = temp.next;
+                    head = temp;
+                    System.out.println("first node deleted");
+                    return;
+                case 2:
+
+                    Node tempe_r = tail;
+                    tail = tempe_r.prev;
+                    tempe_r.next = null;
+                    tail = tempe_r;
+                    System.out.println("end node deleted");
+                    return;
+                case 3:
+                    Node first = head;
+                    Node ptr = first.next;
+                    System.out.println("enter position");
+                    int position = sc.nextInt();
+                    for (int i = 0; i < position - 2; i++) {
+                        first = ptr;
+                        ptr = ptr.next;
+                    }
+                    first.next = ptr.next;
+                    ptr.next = first;
+                    System.out.println(" node deleted");
+                    return;
+            }
+        }
+
+    }
+
+    static void Display() {
+        Node temp = head;
+        if (temp == null) {
+            System.out.println("No elements exist.");
+        } else {
+            while (temp != null) {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+
+            System.out.println();
+        }
+    }
+}
