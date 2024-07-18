@@ -1,0 +1,80 @@
+
+public class Queue {
+
+
+    static int rear = -1;
+
+    public static int[] a = new int[3];
+
+    public static void main(String[] args) {
+
+      add(1);
+      add(2);
+      add(3);
+
+     int data= peek();
+     System.out.println(data);
+
+     remove();
+
+     int ww= peek();
+     System.out.println(ww);
+     remove();
+
+     int rr= peek();
+     System.out.println(rr);
+
+
+
+
+
+      
+
+    }
+
+    static void add(int data) {
+
+        if (rear == a.length - 1) {
+            System.out.println("Full");
+
+        };
+
+        rear++;
+        a[rear] = data;
+
+    }
+
+    static Boolean isempty() {
+        if (rear == -1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    static void remove() {
+
+        if (isempty()) {
+
+            System.out.println("data already empty");
+
+        }
+
+        for (int i = 0; i < rear; i++) {
+            a[i] = a[i + 1];
+
+        }
+
+      
+
+    }
+
+    static int peek() {
+
+        if (isempty()) {
+            System.out.println("empty");
+        }
+        return a[0];
+
+    }
+}
