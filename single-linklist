@@ -1,0 +1,190 @@
+import java.util.Scanner;
+
+public class Linklist {
+
+    static class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    static Node head = null;
+
+    public static void main(String[] args) {
+        Linklist a = new Linklist();
+        Scanner sc = new Scanner(System.in);
+
+        while (true) {
+            System.out.println(" ");
+            System.out.println("1. Create Node\n2. Display\n3.Delete\n0. Exit");
+            System.out.print("Enter Input: ");
+            int data = sc.nextInt();
+            switch (data) {
+                case 1:
+                    a.CreateNode();
+                    break;
+                case 2:
+                    a.Display();
+                    break;
+                case 3:
+                    a.Remove();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid input, please try again.");
+            }
+        }
+    }
+
+    static void CreateNode() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter data: ");
+        int num = sc.nextInt();
+        Node n = new Node(num);
+
+        if (head == null) {
+            head = n;
+        } else {
+            while (true) {
+                System.out.println("1. Begin Node\n2. End Node\n3. Specific Position\n0. Exit");
+                System.out.print("Enter where you want to insert: ");
+                int value = sc.nextInt();
+
+                switch (value) {
+                    case 1:
+                        n.next = head;
+                        head = n;
+                        System.out.println("Data inserted at the beginning.");
+                        return; // return to the main menu
+                    case 2:
+                        Node temp = head;
+                        while (temp.next != null) {
+                            temp = temp.next;
+                        }
+                        temp.next = n;
+                        System.out.println("Node inserted at the end position.");
+                        return;
+                    case 3:
+                        Node current = head;
+                        System.out.print("Enter the position where you want to add the node: ");
+                        int position = sc.nextInt();
+
+                        for (int i = 0; i < position; i++) {
+                            if (current.next != null) {
+                                current = current.next;
+
+                            } else {
+                                System.out.println("Position out of bounds.");
+                                return;
+                            }
+
+                            n.next = current.next;
+                            current.next = n;
+                        }
+
+                        System.out.println("Node inserted at position " + position + ".");
+                        return;
+                    case 0:
+                        return;
+                    default:
+                        System.out.println("Invalid input, please try again.");
+                }
+            }
+        }
+    }
+
+    static void Remove() {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("1.Delete Begin Node\n2.Delete End Node\n3.Delete Specific Position\n0. Exit");
+        System.out.print("Enter where you want to delete: ");
+        int value = sc.nextInt();
+
+        while (true) {
+
+            switch (value) {
+                case 1:
+                    Node temp = head;
+                    if (temp.equals("")) {
+                        System.out.println("All value deleted ");
+                    }
+                    temp = temp.next;
+                    head = temp;
+                    System.out.println("Node Deleted");
+                    return;
+                case 2:
+                    Node current = head;
+                    while (current.next.next != null) {
+
+                        current = current.next;
+
+                    }
+
+                    current.next = null;
+
+                    System.out.println("node deleted");
+                    // // 100 200 300 400
+                    // Node cnt = head;// 100
+                    // Node nxt = cnt.next;// 200
+
+                    // while (nxt != null) {
+                    // cnt = nxt;
+                    // nxt = cnt.next;
+                    // }
+                    // cnt.next = null;
+                    return;
+                case 3:
+                    Node now = head;
+                    System.out.println("enter position");
+                    int position = sc.nextInt();
+
+                    for (int i = 0; i < position - 1; i++) {// 100 200 300 400
+                        now = now.next;
+
+                    }
+                    // loop chalche 0 sudhi atle 200 avche [(now=now.next)]
+                    // Node nodeToDelete = now.next;//300 [delete karvano che ee node apdne now.next
+                    // thi malche atle 200 ne
+                    // next karvani 300 malche je apde delete karvano che]
+
+                    // Node nextnode=nodeToDelete.next;//400
+                    // nodetodelete.next ma apdne 400 malche atle nextnode ma have 400 avi gya
+                    // now.next = nextnode;
+                    // je have apde now.next(200) ma nakhi devana
+
+                    Node delete = now.next;
+                    Node nextnode = delete.next;
+                    now.next = nextnode;// 200 ma 400 nakhu
+                    System.out.println("Node deleted");
+
+                    return;
+
+                case 0:
+                    return;
+
+            }
+
+        }
+    }
+
+    static void Display() {
+        Node temp = head;
+
+        if (temp == null) {
+            System.out.println("No elements exist.");
+        } else {
+            while (temp != null) {
+                System.out.print(temp.data + " ");
+                temp = temp.next;
+            }
+            System.out.println();
+        }
+    }
+}
