@@ -1,0 +1,83 @@
+
+import java.util.Scanner;
+
+public class Bubble {
+
+    public static void main(String[] args) {
+
+        int[] num = {3, 5, 9, 6, 4, 2};
+
+        System.out.println("enter element");
+
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        System.out.println("enter value");
+        int[] value = new int[a];
+
+        for (int i = 0; i < value.length; i++) {
+            value[i] = sc.nextInt();
+        }
+        // Bubblesort(value);
+        // for (int i = 0; i < value.length; i++) {
+        //     System.out.print(value[i] + " ");
+        // }
+        SelectionSort(value);
+        System.out.println("sorting value");
+        for (int i = 0; i < value.length; i++) {
+            System.out.print(value[i] + " ");
+        }
+
+    }
+
+    static void Bubblesort(int[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            int flag = 0;
+
+            for (int j = 0; j < array.length - 1 - i; j++) {
+
+                if (array[j] > array[j + 1]) {
+
+                    int temp;
+                    temp = array[j];
+                    array[j] = array[j + 1];
+                    array[j + 1] = temp;
+                    flag = 1;
+                }
+
+            }
+
+            if (flag == 0) {
+                break;
+            }
+        }
+
+    }
+
+    static void SelectionSort(int[] sort) {
+// 5,4,3
+        int temp, min;
+        for (int i = 0; i < sort.length; i++) {
+            min = i;
+            for (int j = i + 1; j < sort.length; j++) {
+
+                if (sort[j] < sort[min]) {
+                    min = j;
+                }
+            }
+
+            temp = sort[min];
+            sort[min] = sort[i];
+            sort[i] = temp;
+
+            for (int k = 0; k < sort.length; k++) {
+                System.out.print(sort[k] + " ");
+
+            }
+            System.out.println();
+        }
+    }
+
+  
+
+}
