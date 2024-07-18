@@ -1,0 +1,58 @@
+
+import java.util.Scanner;
+
+public class linearsearch {
+
+    public static void main(String[] args) {
+        System.out.println("enter element");
+
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        System.out.println("enter value");
+        int[] value = new int[a];
+
+        for (int i = 0; i < value.length; i++) {
+            value[i] = sc.nextInt();
+        }
+        System.out.println("enter target value");
+        int target = sc.nextInt();
+
+        // Linear(value, target);
+        int result = binary(value, target);
+        System.out.println("element found");
+        System.out.println(result);
+
+    }
+
+    static void Linear(int[] array, int target) {
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] == target) {
+                System.out.println("element found at index " + i);
+            }
+        }
+    }
+
+    // 1 22  28 35  55
+
+    static int binary(int[] array, int target) {
+        int start = 0;
+        int end = array.length - 1;
+
+        while (start <= end) {
+
+            int mid;
+            mid = (start + end) / 2;
+
+            if (array[mid] == target) {
+
+                return mid;
+            } else if (array[mid] < target) {
+                start = mid + 1;
+
+            } else {
+                end = mid - 1;
+            }
+        }
+        return -1;
+    }
+}
