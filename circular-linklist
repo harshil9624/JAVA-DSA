@@ -1,0 +1,183 @@
+import java.util.Scanner;
+
+public class Circularlinklist {
+    static class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+
+    }
+
+    static Node head = null;
+    static Node tail = null;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Circularlinklist c = new Circularlinklist();
+
+        while (true) {
+            System.out.println(" ");
+            System.out.println("1. Create Node\n2. Delete\n3.Display\n0. Exit");
+            System.out.print("Enter Input: ");
+            int data = sc.nextInt();
+            switch (data) {
+                case 1:
+                    c.create();
+                    break;
+                case 2:
+                    c.Remove();
+                    break;
+                case 3:
+                    c.Display();
+                    break;
+                case 0:
+                    return;
+                default:
+                    System.out.println("Invalid input, please try again.");
+            }
+        }
+
+    }
+
+    static void create() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("enter data");
+        int value = sc.nextInt();
+        Node new_node = new Node(value);
+
+        if (head == null) {
+            head = new_node;
+            tail = new_node;
+            tail.next = head;
+            System.out.println("new node created");
+        } else {
+            while (true) {
+                System.out.println("Circular linklist");
+                System.out.println("1. Begin Node\n2. End Node\n3. Specific Position\n0. Exit");
+                System.out.print("Enter where you want to insert: ");
+                int data = sc.nextInt();
+
+                switch (data) {
+
+                    case 1:
+                        new_node.next = head;
+                        head = new_node;
+                        tail.next = head;
+                        System.out.println("node inserted at begin");
+                        return;
+                    case 2:
+                        tail.next = new_node;
+                        new_node.next = head;
+                        tail = new_node;
+                        System.out.println("node inserted at End");
+                        return;
+                    case 3:
+
+                        Node temp = head;
+                        Node ptr = temp.next;
+                        System.out.print("Enter Position  : ");
+                        int i = sc.nextInt();
+
+                        for (int j = 0; j < i - 2; j++) {
+                            temp = ptr;
+                            ptr = ptr.next;
+
+                        }
+
+                        if (i == 1) {
+                            new_node.next = temp;
+                            head = new_node;
+                            tail.next = head;
+                        }
+
+                        temp.next = new_node;
+                        new_node.next = ptr;
+                        System.out.println("node insert at specific position");
+                        return;
+                    case 0:
+                        return;
+
+                }
+
+            }
+        }
+    }
+
+    static void Remove() {
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Circular linklist  Deletion");
+            System.out.println("1. Begin Node\n2. End Node\n3. Specific Position\n0. Exit");
+            System.out.print("Enter where you want to Delete: ");
+            int data = sc.nextInt();
+
+            switch (data) {
+                case 1:
+                    if (head == null) {
+                        System.out.println("list is empty");
+                        return;
+
+                    } else {
+                        Node temp = head;
+                        temp = temp.next;
+                        head = temp;
+                        System.out.println("Node Deleted");
+                    }
+                    return;
+                case 2:
+                    Node temp = head;
+                    Node ptr = temp.next;
+
+                    while (ptr != head) {
+                        temp = ptr;
+                        ptr = ptr.next;
+                    }
+
+                    tail = temp;
+                    tail.next = head;
+                    System.out.println("node deleted");
+                    return;
+                case 3:
+                    Node first = head;
+                    Node second = first.next;
+                    System.out.println("enter position");
+                    int position = sc.nextInt();
+                    for (int i = 0; i < position - 2; i++) {
+                        first = second;
+                        second = second.next;
+                    }
+                    if (position == 1) {
+                        head = first.next;
+                        tail.next = head;
+
+                    } else {
+                        first.next = second.next;
+
+                    }
+                    System.out.println("node deleted at specific position");
+                    return;
+                case 0:
+                    return;
+            }
+
+        }
+    }
+
+    static void Display() {
+
+        if (head == null) {
+            System.out.println("list is empty");
+        } else {
+            Node temp = head;
+            do {
+                System.out.println(temp.data);
+                temp = temp.next;
+            } while (temp != head);
+        }
+
+    }
+}
